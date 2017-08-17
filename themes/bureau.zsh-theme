@@ -85,11 +85,11 @@ if [[ $EUID -eq 0 ]]; then
   _LIBERTY="%{$fg[red]%}#"
 else
   _USERNAME="%{$fg_bold[white]%}%n"
-  if [[ $(hostname -f | grep "\.dev\.") ]]; then
+  if [[ -n $(hostname -f | grep "\.dev\.") ]]; then
     _LIBERTY="%{$fg[blue]%}$"
-  elif [[ $(hostname -f | grep "\.stage\.") ]]; then
+  elif [[ -n $(hostname -f | grep "\.stage\.") ]]; then
     _LIBERTY="%{$fg[yellow]%}$"
-  elif [[ $(hostname -f | grep "\.prod\.") ]]; then
+  elif [[ -n $(hostname -f | grep "\.prod\.") ]]; then
     _LIBERTY="%{$fg[red]%}$"
   else
     _LIBERTY="%{$fg[green]%}$"
