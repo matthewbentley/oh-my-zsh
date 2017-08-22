@@ -91,6 +91,8 @@ else
     _LIBERTY="%{$fg[yellow]%}$"
   elif [[ -n $(hostname -f | grep "\.prod\.") ]]; then
     _LIBERTY="%{$fg[red]%}$"
+  elif [[ -n $(hostname -f | grep "\.corp\.") ]]; then
+    _LIBERTY="%{$fg[magenta]%}$"
   else
     _LIBERTY="%{$fg[green]%}$"
   fi
