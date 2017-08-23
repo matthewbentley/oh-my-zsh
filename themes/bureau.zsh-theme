@@ -120,9 +120,9 @@ _1LEFT="$_USERNAME $_PATH"
 _1RIGHT="[%*] "
 
 bureau_precmd () {
-  _1SPACES=`get_space $_1LEFT $_1RIGHT`
+  _1SPACES=`get_space $_1LEFT $(virtualenv_prompt_info)$_1RIGHT`
   print
-  print -rP "$_1LEFT$_1SPACES$_1RIGHT"
+  print -rP "$_1LEFT$_1SPACES$(virtualenv_prompt_info)$_1RIGHT"
 }
 
 setopt prompt_subst
