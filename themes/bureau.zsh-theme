@@ -99,6 +99,12 @@ else
 fi
 _USERNAME="$_USERNAME%{$reset_color%}@%m"
 _LIBERTY="$_LIBERTY%{$reset_color%}"
+if [[ -f $(which faster) ]]; then
+    _ROLE=$(faster role)
+    _ROLE="#%{$fg_bold[white]%}$_ROLE%{$reset_color%}"
+else
+    _ROLE=""
+fi
 
 
 get_space () {
@@ -116,7 +122,7 @@ get_space () {
   echo $SPACES
 }
 
-_1LEFT="$_USERNAME $_PATH"
+_1LEFT="$_USERNAME$_ROLE $_PATH"
 _1RIGHT="[%*] "
 
 bureau_precmd () {
