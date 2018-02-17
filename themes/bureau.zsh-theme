@@ -131,9 +131,23 @@ bureau_precmd () {
   print -rP "$_1LEFT$_1SPACES$(virtualenv_prompt_info)$_1RIGHT"
 }
 
+set_it2_status () {
+  if [[ -f $(which it2setkeylabel) ]]; then
+    git_info="$(bureau_git_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' |sed -r 's/%\{%\}//g')"
+    virt_info="$(virtualenv_prompt_info)"
+    if [[ -n $git_info$virt_info ]]; then
+      p=$virt_info$git_info
+    else
+      p=$(pwd)
+    fi
+    it2setkeylabel set status "$p"
+  fi
+}
+
 setopt prompt_subst
 PROMPT='> $_LIBERTY '
 RPROMPT='$(nvm_prompt_info) $(bureau_git_prompt)'
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd bureau_precmd
+add-zsh-hook precmd set_it2_status
