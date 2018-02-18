@@ -133,10 +133,11 @@ bureau_precmd () {
 
 set_it2_status () {
   if [[ -f $(which it2setkeylabel) ]]; then
+    hn=$(hostname -f | sed 's/\.yelpcorp\.com//')
     git_info="$(bureau_git_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' |sed -r 's/%\{%\}//g')"
     virt_info="$(virtualenv_prompt_info)"
     dir="$(pwd | sed 's#/.*/.*\(/.*\)/#...\1/#')"
-    p="$dir $virt_info$git_info"
+    p="$hn $dir $virt_info$git_info"
     it2setkeylabel set status "$p"
   fi
 }
